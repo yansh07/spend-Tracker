@@ -70,3 +70,26 @@ PocketFlow is a minimalist, real-time **personal spend tracker** built using **S
 5. **Run the app**
    ```bash
    streamlit run app.py
+     
+### 📬 Monthly Report Format
+Every month-end, PocketFlow sends:
+
+🧾 Subject: "Your Monthly Spend Report 📜"  
+📎 Attachment: spends.csv  
+🧠 Message: "Attached is your full monthly expense report 🥲. Now cry accordingly."  
+
+*(Yes. We're keeping it real.)*    
+
+### 🧠 Future Plans
+**-> Add Google Sign-in**  
+**-> Expense trends with charts**  
+**-> Export to Excel**  
+**-> Light/Dark mode toggle**  
+
+## 📜 License  
+MIT — use it, modify it, share it freely.  
+
+### 🙏 Credits
+**Google Sheets API**  
+**Streamlit community**  
+**ChatGPT for guidance & rubber-duck debugging 🦆**
