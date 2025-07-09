@@ -1,3 +1,9 @@
+./env
 .env
-venv
+./venv
+spends.csv
+./gcp_service_account
+./__pycache__
 gcp_service_account.json
+__pycache__/
+*.pyc
