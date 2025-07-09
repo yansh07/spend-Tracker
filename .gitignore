@@ -7,3 +7,4 @@ spends.csv
 gcp_service_account.json
 __pycache__/
 *.pyc
+venv
