@@ -1,5 +1,4 @@
 import os
-from openai import OpenAI
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
@@ -12,15 +11,16 @@ from email import encoders
 import dotenv
 
 def get_sheet(cred_json, spreadsheet_name):
-    scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
-    creds_dict = st.secrets["gcp_service_account"]
     scope = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
     ]
-    creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
+    
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"], scopes=scope
+    )
     client = gspread.authorize(creds)
-    sheet = client.open(spreadsheet_name).sheet1
+    sheet = client.open("SpendTracker").sheet1
     return sheet
 
 SPREADSHEET_NAME = "SpendTracker"
