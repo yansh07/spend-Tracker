@@ -59,9 +59,9 @@ with st.sidebar:
     if data:
         df = pd.DataFrame(data)
         df["Amount"] = pd.to_numeric(df["Amount"], errors="coerce").fillna(0)
-        total_gain = df[df["category"] == "Gain"]["amount"].sum()
-        total_loss = df[df["category"] == "Loss"]["amount"].sum()
-        total_borrow = df[df["category"] == "Borrow"]["amount"].sum()
+        total_gain = df[df["Category"] == "Gain"]["Amount"].sum()
+        total_loss = df[df["Category"] == "Loss"]["Amount"].sum()
+        total_borrow = df[df["Category"] == "Borrow"]["Amount"].sum()
         st.metric("Total Gain 💰", f"₹ {total_gain:,.2f}")
         st.metric("Total Loss 🧾", f"₹ {total_loss:,.2f}")
         st.metric("Total Borrowed 💳", f"₹ {total_borrow:,.2f}")
