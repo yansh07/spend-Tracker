@@ -58,7 +58,7 @@ with st.sidebar:
     data = get_all_spends()
     if data:
         df = pd.DataFrame(data)
-        df["amount"] = pd.to_numeric(df["amount"], errors="coerce").fillna(0)
+        df["Amount"] = pd.to_numeric(df["amount"], errors="coerce").fillna(0)
         total_gain = df[df["category"] == "Gain"]["amount"].sum()
         total_loss = df[df["category"] == "Loss"]["amount"].sum()
         total_borrow = df[df["category"] == "Borrow"]["amount"].sum()
