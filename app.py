@@ -26,14 +26,16 @@ if not st.session_state.authenticated:
     st.stop() #if not authenticated, rest of code will not render
 
 name = "Priyanshu"
-current_time = datetime.datetime.now()
+current_hour = datetime.datetime.now().hour
 
-if current_time.hour < 12:
+if 5 <= current_hour < 12:
     st.markdown(f"<h1 style='text-align: center;'>Good Morning 🌅, {name}</h1>", unsafe_allow_html=True)
-elif current_time.hour > 12 and current_time.hour < 18:
+elif 12 <= current_hour < 17:
     st.markdown(f"<h1 style='text-align: center;'>Good Afternoon 🌞, {name}</h1>", unsafe_allow_html=True)
+elif 17 <= current_hour < 20:
+    st.markdown(f"<h1 style='text-align: center;'>Good Evening 🌄, {name}</h1>", unsafe_allow_html=True)
 else:
-    st.markdown(f"<h1 style='text-align: center;'>Good Evening 🌃, {name}</h1>", unsafe_allow_html=True)
+    st.markdown(f"<h1 style='text-align: center;'>Good Night 🌌, {name}</h1>", unsafe_allow_html=True)
 
 import pandas as pd
 
@@ -54,7 +56,7 @@ with st.sidebar:
                 add_spend(row)
                 st.success("Spend Added Successfully 🎉")
 
-    st.header("Your total spends 🖩")
+    st.header("Your total spends 🔢")
     data = get_all_spends()
     if data:
         df = pd.DataFrame(data)
