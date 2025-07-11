@@ -32,7 +32,7 @@ if 5 <= current_hour < 12:
     st.markdown(f"<h1 style='text-align: center;'>Good Morning 🌅, {name}</h1>", unsafe_allow_html=True)
 elif 12 <= current_hour < 17:
     st.markdown(f"<h1 style='text-align: center;'>Good Afternoon 🌞, {name}</h1>", unsafe_allow_html=True)
-elif 17 <= current_hour < 20:
+elif 17 <= current_hour < 21:
     st.markdown(f"<h1 style='text-align: center;'>Good Evening 🌄, {name}</h1>", unsafe_allow_html=True)
 else:
     st.markdown(f"<h1 style='text-align: center;'>Good Night 🌌, {name}</h1>", unsafe_allow_html=True)
