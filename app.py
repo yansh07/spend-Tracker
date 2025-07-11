@@ -2,6 +2,7 @@ from utils import read_data, add_spend, get_all_spends, clear_sheet_data, genera
 import pandas as pd
 import streamlit as st
 import datetime
+import pytz
 import calendar
 import os
 import dotenv
@@ -26,7 +27,9 @@ if not st.session_state.authenticated:
     st.stop() #if not authenticated, rest of code will not render
 
 name = "Priyanshu"
-current_hour = datetime.datetime.now().hour
+tz = pytz.timezone('Asia/Kolkata')
+local_time = datetime.datetime.now(tz)
+current_hour = local_time.hour
 
 if 5 <= current_hour < 12:
     st.markdown(f"<h1 style='text-align: center;'>Good Morning 🌅, {name}</h1>", unsafe_allow_html=True)
