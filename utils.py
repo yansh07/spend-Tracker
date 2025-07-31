@@ -60,27 +60,26 @@ def generate_csv(data):
 def send_email_with_csv(csv_path):
     dotenv.load_dotenv()
 
-    from_address = os.getenv("EMAIL_ADDRESS")
+    from_address = os.getenv("EMAIL_ADDRESS", "").strip()
+    password = os.getenv("EMAIL_PASSWORD", "").strip()
     to_address = from_address  # sending to self
-    password = os.getenv("EMAIL_PASSWORD")
+
+    if not from_address or not password:
+        raise ValueError("❌ Email credentials missing! Check your .env file.")
 
     subject = "Monthly Report: Your Expenses Are Judging You 😂"
     body = "Attached is your full monthly expense report 🥲. Now cry accordingly."
 
     # Setup MIME
     message = MIMEMultipart()
-    from_address = os.getenv("EMAIL_ADDRESS", "").strip()
-    password = os.getenv("EMAIL_PASSWORD", "").strip()
-
-    if not from_address or not password:
-        raise ValueError("❌ Email credentials missing! Check your .env file.")
-
+    message['From'] = from_address
+    message['To'] = to_address
     message['Subject'] = subject
 
     # Attach body
     message.attach(MIMEText(body, 'plain'))
 
-    # Open file in binary mode and attach
+    # Attach CSV
     with open(csv_path, "rb") as file:
         part = MIMEBase('application', 'octet-stream')
         part.set_payload(file.read())
