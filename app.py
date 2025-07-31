@@ -61,7 +61,7 @@ with st.sidebar:
         with st.form(key="data_form"):
             date = st.date_input("Date")
             category = st.selectbox("Choose a category", ("Gain", "Loss", "Borrow"))
-            amount = st.number_input("Amount", min_value=0.0, format="%.2f")
+            amount = st.number_input("amount", min_value=0.0, format="%.2f")
             note = st.text_input("Note")
 
             submit = st.form_submit_button("Submit")
