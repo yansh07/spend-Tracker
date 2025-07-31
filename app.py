@@ -1,4 +1,4 @@
-from utils import read_data, add_spend, get_all_spends, clear_sheet_data, generate_csv, send_email_with_csv, has_report_been_sent_today, mark_report_as_sent
+from utils import read_data, add_spend, get_all_spends, clear_sheet_data, has_report_been_sent_today, get_monthly_summary, send_telegram_message, mark_report_as_sent
 import pandas as pd
 import streamlit as st
 import datetime
@@ -41,6 +41,18 @@ else:
     st.markdown(f"<h1 style='text-align: center;'>Good Night 🌌, {name}</h1>", unsafe_allow_html=True)
 
 import pandas as pd
+st.markdown("---")
+st.subheader("🧪 Dev Testing")
+
+if st.button("📲 Send Test Summary on Telegram"):
+    data = get_all_spends()
+    
+    if data:
+        message = get_monthly_summary(data)
+        send_telegram_message(message)
+        st.success("Test summary sent on Telegram ✅")
+    else:
+        st.warning("No data to summarize 😅")
 
 with st.sidebar:
     st.header("Add your spend 💸")
@@ -85,11 +97,10 @@ last_day = calendar.monthrange(today.year, today.month)[1]
 
 if today.day == last_day and not has_report_been_sent_today():
     data = get_all_spends()
-    generate_csv(data)
-    send_email_with_csv("spends.csv")
+    message = get_monthly_summary(data)
+    send_telegram_message(message)
     clear_sheet_data()
     mark_report_as_sent()
-    st.success("✅ Monthly report sent to your inbox!")
 
 st.markdown("<h3 style='text-align: center:'>Your balance table 💰</h3>", unsafe_allow_html=True)
 data = get_all_spends()
