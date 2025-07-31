@@ -74,10 +74,15 @@ def send_telegram_message(message):
 
 def get_monthly_summary(data):
     df = pd.DataFrame(data)
-    df["Amount"] = pd.to_numeric(df["Amount"], errors="coerce").fillna(0)
-    total_gain = df[df["Category"] == "Gain"]["Amount"].sum()
-    total_loss = df[df["Category"] == "Loss"]["Amount"].sum()
-    total_borrow = df[df["Category"] == "Borrow"]["Amount"].sum()
+    df.columns = df.columns.str.strip().str.lower()  # 🧹 normalize column names
+
+    if "amount" not in df.columns or "category" not in df.columns:
+        return "⚠️ Monthly summary cannot be created. 'Amount' or 'Category' column missing."
+
+    df["amount"] = pd.to_numeric(df["amount"], errors="coerce").fillna(0)
+    total_gain = df[df["category"] == "Gain"]["amount"].sum()
+    total_loss = df[df["category"] == "Loss"]["amount"].sum()
+    total_borrow = df[df["category"] == "Borrow"]["amount"].sum()
 
     message = (
         "*📊 Monthly Spend Summary:*\n\n"

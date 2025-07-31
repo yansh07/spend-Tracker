@@ -73,12 +73,16 @@ with st.sidebar:
 
     st.header("Your total spends 🔢")
     data = get_all_spends()
+    
     if data:
         df = pd.DataFrame(data)
+        df.columns = df.columns.str.strip().str.lower()  # same cleanup here
+
         df["amount"] = pd.to_numeric(df["amount"], errors="coerce").fillna(0)
-        total_gain = df[df["Category"] == "Gain"]["amount"].sum()
-        total_loss = df[df["Category"] == "Loss"]["amount"].sum()
-        total_borrow = df[df["Category"] == "Borrow"]["amount"].sum()
+        total_gain = df[df["category"] == "Gain"]["amount"].sum()
+        total_loss = df[df["category"] == "Loss"]["amount"].sum()
+        total_borrow = df[df["category"] == "Borrow"]["amount"].sum()
+
         st.metric("Total Gain 💰", f"₹ {total_gain:,.2f}")
         st.metric("Total Loss 🧾", f"₹ {total_loss:,.2f}")
         st.metric("Total Borrowed 💳", f"₹ {total_borrow:,.2f}")
