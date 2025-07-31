@@ -89,6 +89,7 @@ if today.day == last_day:
     send_email_with_csv("spends.csv")
     clear_sheet_data()
     st.success("✅ Monthly report sent to your inbox!")
+    st.rerun()
 
 st.markdown("<h3 style='text-align: center:'>Your balance table 💰</h3>", unsafe_allow_html=True)
 data = get_all_spends()
