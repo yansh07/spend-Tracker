@@ -72,6 +72,7 @@ def send_telegram_message(message):
     else:
         print(f"⚠️ Telegram error: {response.text}")
 
+st.write("🧪 Raw data:", data)
 def get_monthly_summary(data):
     df = pd.DataFrame(data)
 

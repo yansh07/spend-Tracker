@@ -41,19 +41,6 @@ else:
     st.markdown(f"<h1 style='text-align: center;'>Good Night 🌌, {name}</h1>", unsafe_allow_html=True)
 
 import pandas as pd
-st.markdown("---")
-st.subheader("🧪 Dev Testing")
-
-if st.button("📲 Send Test Summary on Telegram"):
-    data = get_all_spends()
-    
-    if data:
-        message = get_monthly_summary(data)
-        send_telegram_message(message)
-        st.success("Test summary sent on Telegram ✅")
-    else:
-        st.warning("No data to summarize 😅")
-
 with st.sidebar:
     st.header("Add your spend 💸")
 
