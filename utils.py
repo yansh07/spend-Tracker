@@ -74,7 +74,9 @@ def send_telegram_message(message):
 
 def get_monthly_summary(data):
     df = pd.DataFrame(data)
-    df.columns = df.columns.str.strip().str.lower()  # 🧹 normalize column names
+
+    # 🧹 Normalize column names safely
+    df.columns = [str(col).strip().lower() for col in df.columns]
 
     if "amount" not in df.columns or "category" not in df.columns:
         return "⚠️ Monthly summary cannot be created. 'Amount' or 'Category' column missing."
@@ -91,6 +93,7 @@ def get_monthly_summary(data):
         f"💳 *Total Borrowed:* ₹ {total_borrow:,.2f}"
     )
     return message
+
 
 STATUS_FILE = "last_report_sent.txt"
 

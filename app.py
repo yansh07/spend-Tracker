@@ -76,7 +76,7 @@ with st.sidebar:
     
     if data:
         df = pd.DataFrame(data)
-        df.columns = df.columns.str.strip().str.lower()  # same cleanup here
+        df.columns = [str(col).strip().lower() for col in df.columns]
 
         df["amount"] = pd.to_numeric(df["amount"], errors="coerce").fillna(0)
         total_gain = df[df["category"] == "Gain"]["amount"].sum()
