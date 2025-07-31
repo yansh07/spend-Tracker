@@ -1,4 +1,4 @@
-from utils import read_data, add_spend, get_all_spends, clear_sheet_data, generate_csv, send_email_with_csv
+from utils import read_data, add_spend, get_all_spends, clear_sheet_data, generate_csv, send_email_with_csv, has_report_been_sent_today, mark_report_as_sent
 import pandas as pd
 import streamlit as st
 import datetime
@@ -83,13 +83,13 @@ with st.sidebar:
 today = datetime.datetime.today()
 last_day = calendar.monthrange(today.year, today.month)[1]
 
-if today.day == last_day:
+if today.day == last_day and not has_report_been_sent_today():
     data = get_all_spends()
     generate_csv(data)
     send_email_with_csv("spends.csv")
     clear_sheet_data()
+    mark_report_as_sent()
     st.success("✅ Monthly report sent to your inbox!")
-    st.rerun()
 
 st.markdown("<h3 style='text-align: center:'>Your balance table 💰</h3>", unsafe_allow_html=True)
 data = get_all_spends()

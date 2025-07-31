@@ -3,6 +3,7 @@ import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
 import streamlit as st
+from datetime import datetime
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -52,6 +53,18 @@ def clear_sheet_data():
         return
     for i in range(num_rows, 1, -1):
         sheet.delete_rows(i)
+
+STATUS_FILE = "last_report_sent.txt"
+def has_report_been_sent_today():
+    if os.path.exists(STATUS_FILE):
+        with open(STATUS_FILE, "r") as f:
+            last_sent_date = f.read().strip()
+            return last_sent_date == str(datetime.today().date())
+    return False
+
+def mark_report_as_sent():
+    with open(STATUS_FILE, "w") as f:
+        f.write(str(datetime.today().date()))
 
 def generate_csv(data):
     df = pd.DataFrame(data)
